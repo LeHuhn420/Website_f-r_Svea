@@ -1,0 +1,13 @@
+# Zeilenenden vereinheitlichen: im Repository immer LF,
+# in der Arbeitskopie passend zum Betriebssystem.
+* text=auto
+
+# Bild- und Videodateien niemals umwandeln
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.webp binary
+*.heic binary
+*.mp4  binary
+*.mov  binary
