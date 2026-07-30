@@ -188,8 +188,8 @@ details[open] summary::after {
 /* Bilderraster in den Ausklappfenstern */
 .trip-photos {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
     margin-top: 15px;
 }
 
