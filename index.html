@@ -15,7 +15,7 @@
             <p class="subtitle">365 Tage, und jeder einzelne war schöner als der davor.</p>
         </header>
 
-        <!-- LIVE ZÄHLER -->
+        <!-- LIVE ZÄHLER (Ab 30.08.2025, 20:00 Uhr) -->
         <section class="counter-section">
             <div class="counter-title">Wir sind unzertrennlich seit:</div>
             <div class="timer">
@@ -52,20 +52,90 @@
             </p>
         </section>
 
-        <!-- FOTO GALERIE -->
-        <section class="gallery">
-            <div class="photo-card">
-                <!-- ERSETZE DAS DIV UNTERHALB DURCH EIN BILD: <img src="foto1.jpg" style="width:100%; border-radius:8px;"> -->
-                <div class="photo-placeholder">Foto 1 einfügen</div>
-                <div class="caption">Unser schönster Moment</div>
-            </div>
-            <div class="photo-card">
-                <div class="photo-placeholder">Foto 2 einfügen</div>
-                <div class="caption">Ein unvergesslicher Tag</div>
-            </div>
-            <div class="photo-card">
-                <div class="photo-placeholder">Foto 3 einfügen</div>
-                <div class="caption">Du & Ich</div>
+        <!-- NEU: AUSKLAPPBARE FENSTER FÜR URLAUBE & HIGHLIGHTS -->
+        <section class="highlights-section">
+            <h2>Unsere Highlights & Urlaube ✈️</h2>
+            
+            <details>
+                <summary>🏖️ Unser erster gemeinsamer Urlaub</summary>
+                <div class="details-content">
+                    Weißt du noch, wie schön es war? Hier kannst du euren liebsten Urlaubsmoment oder eine kleine Anekdote reinschreiben, an die ihr euch immer wieder gerne erinnert.
+                </div>
+            </details>
+
+            <details>
+                <summary>🌟 Unser lustigster Moment</summary>
+                <div class="details-content">
+                    Egal ob ein Lachkrampf im Alltag oder eine spontane Aktion – diese Momente machen uns aus und bleiben für immer im Kopf!
+                </div>
+            </details>
+
+            <details>
+                <summary>🗺️ Das haben wir noch vor (Bucket List)</summary>
+                <div class="details-content">
+                    <ul>
+                        <li>• Weitere schöne Orte gemeinsam bereisen</li>
+                        <li>• Neue Restaurants und kulinarische Highlights testen</li>
+                        <li>• Noch unendlich viele gemeinsame Jahre feiern!</li>
+                    </ul>
+                </div>
+            </details>
+        </section>
+
+        <!-- NEU: INTERAKTIVE POLAROID-GALERIE (Antippen zum Umdrehen) -->
+        <section class="gallery-section">
+            <h2 class="gallery-title">Unsere Erinnerungen 📸</h2>
+            <p class="gallery-subtitle">Tippe auf ein Polaroid, um die Erinnerung zu aufzudecken!</p>
+
+            <div class="gallery">
+                <!-- Polaroid 1 -->
+                <div class="polaroid-wrapper" onclick="this.classList.toggle('is-flipped')">
+                    <div class="polaroid-inner">
+                        <div class="polaroid-front">
+                            <div>
+                                <div class="polaroid-cover-icon">💌</div>
+                                <p>Antippen zum Öffnen</p>
+                            </div>
+                        </div>
+                        <div class="polaroid-back">
+                            <!-- Für ein echtes Bild: <div class="photo-placeholder"><img src="foto1.jpg"></div> -->
+                            <div class="photo-placeholder">Foto 1 einfügen</div>
+                            <div class="caption">#Lieblingsmoment</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Polaroid 2 -->
+                <div class="polaroid-wrapper" onclick="this.classList.toggle('is-flipped')">
+                    <div class="polaroid-inner">
+                        <div class="polaroid-front">
+                            <div>
+                                <div class="polaroid-cover-icon">✈️</div>
+                                <p>Antippen zum Öffnen</p>
+                            </div>
+                        </div>
+                        <div class="polaroid-back">
+                            <div class="photo-placeholder">Foto 2 einfügen</div>
+                            <div class="caption">#Urlaubsvibes</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Polaroid 3 -->
+                <div class="polaroid-wrapper" onclick="this.classList.toggle('is-flipped')">
+                    <div class="polaroid-inner">
+                        <div class="polaroid-front">
+                            <div>
+                                <div class="polaroid-cover-icon">❤️</div>
+                                <p>Antippen zum Öffnen</p>
+                            </div>
+                        </div>
+                        <div class="polaroid-back">
+                            <div class="photo-placeholder">Foto 3 einfügen</div>
+                            <div class="caption">#DuUndIch</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -76,10 +146,9 @@
 
     <!-- JAVASCRIPT FÜR DEN LIVE-ZÄHLER -->
     <script>
-        // HIER EUER DATUM UND UHRZEIT EINTRAGEN (Jahr, Monat - 1, Tag, Stunde, Minute)
-        // Achtung: Monate zählen in JS ab 0 (Januar = 0, Februar = 1 ... August = 7 etc.)
-        // Beispiel für 22. August 2025 um 00:00 Uhr: new Date(2025, 7, 22, 0, 0, 0)
-        const startDate = new Date(2025, 7, 22, 0, 0, 0).getTime();
+        // Startdatum: 30. August 2025 um 20:00:00 Uhr
+        // Achtung in JS: Monat 7 = August (0 = Januar)
+        const startDate = new Date(2025, 7, 30, 20, 0, 0).getTime();
 
         function updateTimer() {
             const now = new Date().getTime();

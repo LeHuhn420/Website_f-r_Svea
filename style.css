@@ -3,6 +3,7 @@
     --accent-color: #e88d8d;
     --text-color: #4a4a4a;
     --card-bg: #ffffff;
+    --box-pink: #f07b8c; /* Neues schönes Rosa für die Kästen */
 }
 
 * {
@@ -85,57 +86,205 @@ h1 {
     flex-wrap: wrap;
 }
 
+/* Anpassung 1: Rosa Kästen mit weißer Schrift */
 .time-box {
-    background: #fff0f0;
+    background: var(--box-pink);
     padding: 10px 15px;
     border-radius: 10px;
     min-width: 80px;
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(240, 123, 140, 0.3);
 }
 
 .time-box span {
     display: block;
     font-size: 1.8rem;
     font-weight: bold;
-    color: var(--accent-color);
+    color: #ffffff;
 }
 
 .time-box label {
     font-size: 0.8rem;
     text-transform: uppercase;
-    color: #888;
+    color: #ffffff;
+    opacity: 0.9;
 }
 
-/* Platzhalter für Fotos */
-.gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
+/* Ausklappbare Fenster (Accordion) */
+.highlights-section {
+    background: var(--card-bg);
+    padding: 25px 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    margin-bottom: 40px;
+    text-align: left;
+}
+
+.highlights-section h2 {
+    color: var(--accent-color);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+details {
+    background: #fff0f0;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+summary {
+    padding: 15px 20px;
+    font-weight: bold;
+    color: var(--text-color);
+    cursor: pointer;
+    outline: none;
+    list-style: none;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+summary::after {
+    content: '+';
+    font-size: 1.4rem;
+    color: var(--accent-color);
+    transition: transform 0.2s ease;
+}
+
+details[open] summary::after {
+    transform: rotate(45deg);
+}
+
+.details-content {
+    padding: 15px 20px 20px;
+    border-top: 1px solid rgba(232, 141, 141, 0.2);
+    font-size: 0.95rem;
+}
+
+/* Interaktive Polaroid-Galerie (3D-Flip) */
+.gallery-section {
     margin-bottom: 40px;
 }
 
-.photo-card {
-    background: var(--card-bg);
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+.gallery-title {
+    color: var(--accent-color);
+    margin-bottom: 10px;
+}
+
+.gallery-subtitle {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 25px;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px;
+}
+
+.polaroid-wrapper {
+    background: transparent;
+    width: 100%;
+    height: 280px;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+/* Gekippter Look im Normalzustand */
+.polaroid-wrapper:nth-child(odd) .polaroid-inner {
+    transform: rotate(-3deg);
+}
+.polaroid-wrapper:nth-child(even) .polaroid-inner {
+    transform: rotate(3deg);
+}
+
+.polaroid-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    border-radius: 6px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* Bei Klick/Antippen (Klasse 'is-flipped' durch JS hinzugefügt) */
+.polaroid-wrapper.is-flipped .polaroid-inner {
+    transform: rotateY(180deg) rotate(0deg) !important;
+}
+
+.polaroid-front, .polaroid-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    background: #ffffff;
+    padding: 12px 12px 35px 12px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Vorderseite: Cover zum Antippen */
+.polaroid-front {
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #eee;
+}
+
+.polaroid-cover-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.polaroid-front p {
+    font-size: 0.95rem;
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+/* Rückseite: Das eigentliche Bild (oder der Platzhalter) */
+.polaroid-back {
+    transform: rotateY(180deg);
+    border: 1px solid #ddd;
 }
 
 .photo-placeholder {
     width: 100%;
-    height: 200px;
+    flex-grow: 1;
     background-color: #f2e6e6;
-    border-radius: 8px;
+    border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #aaa;
     font-weight: bold;
+    overflow: hidden;
+}
+
+/* Falls echte Bilder eingebunden werden */
+.photo-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .caption {
     margin-top: 10px;
-    font-size: 0.9rem;
-    color: #666;
+    font-size: 0.95rem;
+    color: #444;
+    font-family: 'Courier New', Courier, monospace; /* Typischer Polaroid-Schriftstil */
+    font-weight: bold;
 }
 
 footer {
