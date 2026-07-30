@@ -242,11 +242,6 @@ details[open] summary::after {
     border: 1px solid #eee;
 }
 
-.polaroid-cover-icon {
-    font-size: 3rem;
-    margin-bottom: 15px;
-}
-
 .polaroid-front p {
     font-size: 0.95rem;
     color: var(--accent-color);
@@ -292,16 +287,4 @@ footer {
     padding: 20px;
     font-size: 0.9rem;
     color: #aaa;
-}
-
-/* Pulsierendes Herz */
-.heart {
-    color: var(--accent-color);
-    display: inline-block;
-    animation: heartbeat 1.5s infinite;
-}
-
-@keyframes heartbeat {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.15); }
 }
