@@ -1,0 +1,158 @@
+:root {
+    --bg-color: #fdf8f8;
+    --accent-color: #e88d8d;
+    --text-color: #4a4a4a;
+    --card-bg: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    text-align: center;
+    padding: 20px;
+}
+
+header {
+    padding: 40px 20px 20px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: #777;
+    margin-bottom: 30px;
+}
+
+.container {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Der Liebesbrief-Bereich */
+.love-letter {
+    background: var(--card-bg);
+    padding: 35px 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    margin-bottom: 40px;
+    text-align: left;
+    position: relative;
+}
+
+.love-letter h2 {
+    color: var(--accent-color);
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.love-letter p {
+    margin-bottom: 15px;
+    font-size: 1.05rem;
+}
+
+/* Live-Zähler */
+.counter-section {
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    margin-bottom: 40px;
+}
+
+.counter-title {
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: var(--accent-color);
+}
+
+.timer {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.time-box {
+    background: #fff0f0;
+    padding: 10px 15px;
+    border-radius: 10px;
+    min-width: 80px;
+}
+
+.time-box span {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+.time-box label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: #888;
+}
+
+/* Platzhalter für Fotos */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.photo-card {
+    background: var(--card-bg);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.photo-placeholder {
+    width: 100%;
+    height: 200px;
+    background-color: #f2e6e6;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    font-weight: bold;
+}
+
+.caption {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+footer {
+    margin-top: 50px;
+    padding: 20px;
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+/* Pulsierendes Herz */
+.heart {
+    color: var(--accent-color);
+    display: inline-block;
+    animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1 Jahr mit Dir ❤️</title>
+    <!-- Verknüpfung zur externen CSS-Datei -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Alles Gute zum 1. Jahrestag <span class="heart">❤️</span></h1>
+            <p class="subtitle">365 Tage, und jeder einzelne war schöner als der davor.</p>
+        </header>
+
+        <!-- LIVE ZÄHLER -->
+        <section class="counter-section">
+            <div class="counter-title">Wir sind unzertrennlich seit:</div>
+            <div class="timer">
+                <div class="time-box">
+                    <span id="days">0</span>
+                    <label>Tage</label>
+                </div>
+                <div class="time-box">
+                    <span id="hours">0</span>
+                    <label>Stunden</label>
+                </div>
+                <div class="time-box">
+                    <span id="minutes">0</span>
+                    <label>Minuten</label>
+                </div>
+                <div class="time-box">
+                    <span id="seconds">0</span>
+                    <label>Sekunden</label>
+                </div>
+            </div>
+        </section>
+
+        <!-- LIEBESBRIEF -->
+        <section class="love-letter">
+            <h2>Für meinen Lieblingsmenschen</h2>
+            <p>
+                Kaum zu glauben, dass jetzt schon ein ganzes Jahr vergangen ist. Wenn ich auf die letzten Monate zurückblicke, muss ich einfach lächeln.
+            </p>
+            <p>
+                Danke für jeden Moment mit dir, für dein Lachen, deine Unterstützung und dafür, dass du mein Leben jeden Tag ein Stückchen besser machst. Ich freue mich auf alles, was wir noch gemeinsam erleben und entdecken werden!
+            </p>
+            <p style="text-align: right; margin-top: 25px; font-weight: bold; color: var(--accent-color);">
+                Ich liebe dich! ❤️
+            </p>
+        </section>
+
+        <!-- FOTO GALERIE -->
+        <section class="gallery">
+            <div class="photo-card">
+                <!-- ERSETZE DAS DIV UNTERHALB DURCH EIN BILD: <img src="foto1.jpg" style="width:100%; border-radius:8px;"> -->
+                <div class="photo-placeholder">Foto 1 einfügen</div>
+                <div class="caption">Unser schönster Moment</div>
+            </div>
+            <div class="photo-card">
+                <div class="photo-placeholder">Foto 2 einfügen</div>
+                <div class="caption">Ein unvergesslicher Tag</div>
+            </div>
+            <div class="photo-card">
+                <div class="photo-placeholder">Foto 3 einfügen</div>
+                <div class="caption">Du & Ich</div>
+            </div>
+        </section>
+
+        <footer>
+            Erstellt mit ganz viel Liebe nur für dich.
+        </footer>
+    </div>
+
+    <!-- JAVASCRIPT FÜR DEN LIVE-ZÄHLER -->
+    <script>
+        // HIER EUER DATUM UND UHRZEIT EINTRAGEN (Jahr, Monat - 1, Tag, Stunde, Minute)
+        // Achtung: Monate zählen in JS ab 0 (Januar = 0, Februar = 1 ... August = 7 etc.)
+        // Beispiel für 22. August 2025 um 00:00 Uhr: new Date(2025, 7, 22, 0, 0, 0)
+        const startDate = new Date(2025, 7, 22, 0, 0, 0).getTime();
+
+        function updateTimer() {
+            const now = new Date().getTime();
+            const difference = now - startDate;
+
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days;
+            document.getElementById("hours").innerText = hours;
+            document.getElementById("minutes").innerText = minutes;
+            document.getElementById("seconds").innerText = seconds;
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer();
+    </script>
+</body>
+</html>
