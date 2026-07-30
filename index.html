@@ -7,7 +7,22 @@
     <!-- Verknüpfung zur externen CSS-Datei -->
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="gesperrt">
+
+    <!-- PASSWORTSPERRE
+         Achtung: Das ist nur eine einfache Sperre gegen zufaellige Besucher.
+         Sie schuetzt die Bilder NICHT - die sind ueber ihre direkte Adresse
+         weiterhin erreichbar. Passwort aendern: siehe Kommentar im Skript unten. -->
+    <div class="login-overlay" id="login">
+        <form class="login-box" id="login-form">
+            <h1>Nur für dich</h1>
+            <p class="login-text">Diese Seite ist privat.<br>Bitte gib das Passwort ein.</p>
+            <input type="password" id="login-eingabe" placeholder="Passwort"
+                   autocomplete="current-password" aria-label="Passwort">
+            <button type="submit">Öffnen</button>
+            <p class="login-fehler" id="login-fehler" hidden>Das war leider nicht richtig.</p>
+        </form>
+    </div>
 
     <div class="container">
         <header>
@@ -110,6 +125,71 @@
                     </div>
                 </div>
             </div>
+        </section>
+
+        <!-- ZEITSTRAHL MIT 5 ANKLICKBAREN PUNKTEN -->
+        <section class="timeline-section">
+            <h2>Unser Weg</h2>
+            <p class="timeline-hinweis">Tippe auf einen Punkt.</p>
+
+            <div class="timeline" id="timeline">
+                <div class="timeline-linie"></div>
+
+                <button class="timeline-punkt" type="button" data-titel="Der Anfang"
+                        data-text="Am 30. August 2025 um 20 Uhr hat alles angefangen. Seitdem zählt jede Sekunde auf dieser Seite mit.">
+                    <span class="punkt"></span>
+                    <span class="punkt-datum">Aug 2025</span>
+                </button>
+
+                <button class="timeline-punkt" type="button" data-titel="Straßburg"
+                        data-text="Unser erster gemeinsamer Trip: mein kleines Auto, ein winziges AirBnB und ein langes Wochenende im Elsass."
+                        data-bild="Bilder/Website/IMG_0377.jpg">
+                    <span class="punkt"></span>
+                    <span class="punkt-datum">Okt 2025</span>
+                </button>
+
+                <button class="timeline-punkt" type="button" data-titel="Weihnachtsmarkt"
+                        data-text="Lichterketten, Glühwein und ein Kuss zwischen den Tannen."
+                        data-bild="Bilder/Website/IMG_0544.jpg">
+                    <span class="punkt"></span>
+                    <span class="punkt-datum">Dez 2025</span>
+                </button>
+
+                <button class="timeline-punkt" type="button" data-titel="München"
+                        data-text="Rennwagen, ein türkisblauer See und eine Kirchendecke, bei der wir beide nur nach oben geschaut haben."
+                        data-bild="Bilder/Website/IMG_1193.jpg">
+                    <span class="punkt"></span>
+                    <span class="punkt-datum">Jun 2026</span>
+                </button>
+
+                <button class="timeline-punkt" type="button" data-titel="Madeira"
+                        data-text="Neun Tage Insel: Sonnenaufgang über den Wolken, Delfine, Nebelwald und du neben mir."
+                        data-bild="Bilder/Website/IMG_1564.jpg">
+                    <span class="punkt"></span>
+                    <span class="punkt-datum">Jul 2026</span>
+                </button>
+
+                <div class="timeline-fenster" id="timeline-fenster" hidden>
+                    <button class="fenster-zu" type="button" id="fenster-zu" aria-label="Schließen">&times;</button>
+                    <h3 id="fenster-titel"></h3>
+                    <img id="fenster-bild" alt="" hidden>
+                    <p id="fenster-text"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- KILOMETERZÄHLER -->
+        <section class="km-section">
+            <h2>Gemeinsame Kilometer</h2>
+            <div class="km-gesamt"><span id="km-zahl">0</span> km</div>
+            <ul class="km-liste" id="km-liste"></ul>
+        </section>
+
+        <!-- ZUFÄLLIGER LIEBESGRUND -->
+        <section class="gruende-section">
+            <h2>Warum ich dich liebe</h2>
+            <div class="grund-feld" id="grund-feld">Drück auf den Knopf.</div>
+            <button class="grund-knopf" type="button" id="grund-knopf">Noch ein Grund</button>
         </section>
 
         <!-- AUSKLAPPBARE FENSTER FÜR URLAUBE & HIGHLIGHTS -->
@@ -231,6 +311,212 @@
 
         setInterval(updateTimer, 1000);
         updateTimer();
+    </script>
+
+    <!-- PASSWORTSPERRE -->
+    <script>
+        // Aktuelles Passwort: unserjahr
+        //
+        // Passwort aendern: Seite oeffnen, mit F12 die Browser-Konsole
+        // aufmachen und dort eingeben:   pruefwert("deinNeuesPasswort")
+        // Den ausgegebenen Wert hier unten einsetzen.
+        const PASSWORT_PRUEFWERT = "7f7f3adf";
+
+        function pruefwert(text) {
+            let h = 2166136261;
+            for (let i = 0; i < text.length; i++) {
+                h ^= text.charCodeAt(i);
+                h = Math.imul(h, 16777619);
+            }
+            return (h >>> 0).toString(16);
+        }
+
+        (function () {
+            const overlay  = document.getElementById("login");
+            const formular = document.getElementById("login-form");
+            const eingabe  = document.getElementById("login-eingabe");
+            const fehler   = document.getElementById("login-fehler");
+
+            function aufsperren() {
+                document.body.classList.remove("gesperrt");
+                overlay.hidden = true;
+            }
+
+            if (sessionStorage.getItem("freigeschaltet") === "ja") {
+                aufsperren();
+            } else {
+                setTimeout(() => eingabe.focus(), 100);
+            }
+
+            formular.addEventListener("submit", function (e) {
+                e.preventDefault();
+                if (pruefwert(eingabe.value) === PASSWORT_PRUEFWERT) {
+                    sessionStorage.setItem("freigeschaltet", "ja");
+                    aufsperren();
+                } else {
+                    fehler.hidden = false;
+                    eingabe.value = "";
+                    eingabe.focus();
+                }
+            });
+        })();
+    </script>
+
+    <!-- ZEITSTRAHL, KILOMETER UND LIEBESGRUENDE -->
+    <script>
+        /* ---------- 1) Zeitstrahl ---------- */
+        (function () {
+            const strahl  = document.getElementById("timeline");
+            const fenster = document.getElementById("timeline-fenster");
+            const titel   = document.getElementById("fenster-titel");
+            const text    = document.getElementById("fenster-text");
+            const bild    = document.getElementById("fenster-bild");
+            const punkte  = [...strahl.querySelectorAll(".timeline-punkt")];
+            let offen = null;
+
+            function schliessen() {
+                fenster.hidden = true;
+                punkte.forEach(p => p.classList.remove("aktiv"));
+                offen = null;
+            }
+
+            function oeffnen(knopf) {
+                titel.textContent = knopf.dataset.titel;
+                text.textContent  = knopf.dataset.text;
+                if (knopf.dataset.bild) {
+                    bild.src = knopf.dataset.bild;
+                    bild.alt = knopf.dataset.titel;
+                    bild.hidden = false;
+                } else {
+                    bild.removeAttribute("src");
+                    bild.hidden = true;
+                }
+
+                punkte.forEach(p => p.classList.remove("aktiv"));
+                knopf.classList.add("aktiv");
+                fenster.hidden = false;
+
+                // Fenster ueber dem Punkt ausrichten, aber im Bereich halten
+                const rahmen = strahl.getBoundingClientRect();
+                const punkt  = knopf.getBoundingClientRect();
+                const mitte  = punkt.left + punkt.width / 2 - rahmen.left;
+                const breite = fenster.offsetWidth;
+                let links = mitte - breite / 2;
+                links = Math.max(0, Math.min(links, rahmen.width - breite));
+                fenster.style.left = links + "px";
+                offen = knopf;
+            }
+
+            punkte.forEach(knopf => {
+                knopf.addEventListener("click", function (e) {
+                    e.stopPropagation();
+                    if (offen === knopf) { schliessen(); } else { oeffnen(knopf); }
+                });
+            });
+
+            document.getElementById("fenster-zu").addEventListener("click", schliessen);
+            fenster.addEventListener("click", e => e.stopPropagation());
+            document.addEventListener("click", function () { if (offen) schliessen(); });
+            document.addEventListener("keydown", e => { if (e.key === "Escape") schliessen(); });
+        })();
+
+        /* ---------- 2) Kilometerzaehler ---------- */
+        // Werte hier anpassen. Startpunkt ist Backnang.
+        const FAHRTEN = [
+            { ort: "Straßburg",  info: "mit dem Auto, hin und zurück",      km:  380 },
+            { ort: "München",    info: "mit dem Auto, hin und zurück",      km:  410 },
+            { ort: "Madeira",    info: "Flug ab Stuttgart, hin und zurück", km: 5600 },
+            { ort: "Madeira",    info: "mit dem Mietwagen über die Insel",  km:  700 }
+        ];
+
+        (function () {
+            const liste = document.getElementById("km-liste");
+            const zahl  = document.getElementById("km-zahl");
+            const summe = FAHRTEN.reduce((s, f) => s + f.km, 0);
+
+            FAHRTEN.forEach(f => {
+                const li = document.createElement("li");
+                li.innerHTML = '<span class="km-ort">' + f.ort + '</span>' +
+                               '<span class="km-info">' + f.info + '</span>' +
+                               '<span class="km-wert">' + f.km.toLocaleString("de-DE") + ' km</span>';
+                liste.appendChild(li);
+            });
+
+            // Hochzaehlen, sobald der Bereich sichtbar wird
+            let gelaufen = false;
+            function hochzaehlen() {
+                if (gelaufen) return;
+                gelaufen = true;
+                const dauer = 1500;
+                const start = performance.now();
+                function schritt(jetzt) {
+                    const anteil = Math.min((jetzt - start) / dauer, 1);
+                    const wert = Math.round(summe * (1 - Math.pow(1 - anteil, 3)));
+                    zahl.textContent = wert.toLocaleString("de-DE");
+                    if (anteil < 1) requestAnimationFrame(schritt);
+                }
+                requestAnimationFrame(schritt);
+            }
+
+            const bereich = document.querySelector(".km-section");
+            if ("IntersectionObserver" in window) {
+                new IntersectionObserver(function (eintraege, beobachter) {
+                    eintraege.forEach(e => {
+                        if (e.isIntersecting) { hochzaehlen(); beobachter.disconnect(); }
+                    });
+                }, { threshold: 0.3 }).observe(bereich);
+            } else {
+                hochzaehlen();
+            }
+        })();
+
+        /* ---------- 3) Zufaelliger Liebesgrund ---------- */
+        // Gruende hier ergaenzen oder aendern.
+        const GRUENDE = [
+            "Weil du mich zum Lachen bringst, auch wenn mir gerade nicht danach ist.",
+            "Weil du dir Sachen merkst, von denen ich dachte, ich hätte sie nur nebenbei erzählt.",
+            "Weil du beim Essen immer probieren willst, was auf meinem Teller liegt.",
+            "Weil du tollpatschig bist und es dir selbst am meisten Spaß macht.",
+            "Weil du singst, wenn du denkst, dass niemand zuhört.",
+            "Weil du dich für Dinge begeistern kannst, die andere übersehen.",
+            "Weil du mir zuhörst, auch wenn ich zum dritten Mal dasselbe erzähle.",
+            "Weil du morgens verstrubbelte Haare hast und trotzdem gut aussiehst.",
+            "Weil ich mit dir stundenlang reden kann, ohne dass es langweilig wird.",
+            "Weil ich mit dir auch schweigen kann, ohne dass es unangenehm wird.",
+            "Weil du dich mit mir um 5 Uhr morgens aus dem Bett quälst, nur für einen Sonnenaufgang.",
+            "Weil du ehrlich bist, auch wenn es unbequem ist.",
+            "Weil du mich nimmst, wie ich bin, und ich das bei dir genauso mache.",
+            "Weil du auf jedem Foto irgendwie noch schöner aussiehst als auf dem davor.",
+            "Weil du bei jedem Hund stehen bleiben musst.",
+            "Weil du dich freust wie ein kleines Kind, wenn etwas Schönes passiert.",
+            "Weil du mir das Gefühl gibst, angekommen zu sein.",
+            "Weil ein Jahr mit dir sich gleichzeitig wie gestern und wie immer schon anfühlt."
+        ];
+
+        (function () {
+            const feld  = document.getElementById("grund-feld");
+            const knopf = document.getElementById("grund-knopf");
+            let beutel = [];
+
+            // Beutel-Prinzip: erst alle Gruende durch, dann neu mischen.
+            function naechster() {
+                if (beutel.length === 0) {
+                    beutel = GRUENDE.slice();
+                    for (let i = beutel.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [beutel[i], beutel[j]] = [beutel[j], beutel[i]];
+                    }
+                }
+                return beutel.pop();
+            }
+
+            knopf.addEventListener("click", function () {
+                feld.classList.remove("wechsel");
+                void feld.offsetWidth;          // Animation neu starten
+                feld.textContent = naechster();
+                feld.classList.add("wechsel");
+            });
+        })();
     </script>
 </body>
 </html>

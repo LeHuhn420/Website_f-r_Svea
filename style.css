@@ -50,8 +50,9 @@ h1 {
     align-items: start;
 }
 
-/* Zähler und Urlaube nehmen die volle Breite ein */
+/* Zähler, Zeitstrahl und Urlaube nehmen die volle Breite ein */
 .counter-section,
+.timeline-section,
 .highlights-section {
     grid-column: 1 / -1;
 }
@@ -333,4 +334,357 @@ footer {
     padding: 20px;
     font-size: 0.9rem;
     color: #aaa;
+}
+
+/* ===== Passwortsperre ===== */
+body.gesperrt {
+    overflow: hidden;
+}
+
+body.gesperrt .container {
+    display: none;
+}
+
+.login-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: var(--bg-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+body:not(.gesperrt) .login-overlay {
+    display: none;
+}
+
+.login-box {
+    background: var(--card-bg);
+    padding: 40px 32px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    width: 100%;
+    max-width: 360px;
+}
+
+.login-box h1 {
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+}
+
+.login-text {
+    color: #888;
+    font-size: 0.95rem;
+    margin-bottom: 22px;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid #f0dcdc;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: inherit;
+    text-align: center;
+    outline: none;
+}
+
+.login-box input:focus {
+    border-color: var(--box-pink);
+}
+
+.login-box button {
+    width: 100%;
+    margin-top: 14px;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: var(--box-pink);
+    color: #fff;
+    font-size: 1rem;
+    font-family: inherit;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.login-box button:hover {
+    background: var(--accent-color);
+}
+
+.login-fehler {
+    margin-top: 14px;
+    color: var(--box-pink);
+    font-size: 0.9rem;
+}
+
+/* ===== Zeitstrahl ===== */
+.timeline-section {
+    background: var(--card-bg);
+    padding: 25px 30px 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+.timeline-section h2 {
+    color: var(--accent-color);
+    margin-bottom: 6px;
+}
+
+.timeline-hinweis {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 30px;
+}
+
+.timeline {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0 4px;
+}
+
+/* Waagerechte Linie hinter den Punkten */
+.timeline-linie {
+    position: absolute;
+    top: 11px;
+    left: 6%;
+    right: 6%;
+    height: 3px;
+    background: #f7dfe3;
+    border-radius: 2px;
+}
+
+.timeline-punkt {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.punkt {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: var(--card-bg);
+    border: 4px solid var(--box-pink);
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.timeline-punkt:hover .punkt {
+    transform: scale(1.2);
+}
+
+.timeline-punkt.aktiv .punkt {
+    background: var(--box-pink);
+    transform: scale(1.25);
+}
+
+.punkt-datum {
+    font-size: 0.82rem;
+    color: #999;
+    text-align: center;
+}
+
+.timeline-punkt.aktiv .punkt-datum {
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+/* Das kleine Fenster über dem Punkt */
+.timeline-fenster {
+    position: absolute;
+    bottom: calc(100% + 16px);
+    z-index: 30;
+    width: 270px;
+    max-width: 100%;
+    background: var(--card-bg);
+    border: 1px solid #f3e2e2;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    padding: 16px 18px 18px;
+    text-align: left;
+}
+
+.timeline-fenster[hidden] {
+    display: none;
+}
+
+.timeline-fenster h3 {
+    color: var(--accent-color);
+    font-size: 1.05rem;
+    margin-bottom: 8px;
+    padding-right: 20px;
+}
+
+.timeline-fenster img {
+    width: 100%;
+    max-height: 140px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.timeline-fenster p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.fenster-zu {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.4rem;
+    line-height: 1;
+    color: var(--accent-color);
+    cursor: pointer;
+    padding: 0 4px;
+}
+
+/* ===== Kilometerzähler ===== */
+.km-section {
+    background: var(--card-bg);
+    padding: 25px 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+.km-section h2 {
+    color: var(--accent-color);
+    margin-bottom: 10px;
+}
+
+.km-gesamt {
+    font-size: 2.6rem;
+    font-weight: bold;
+    color: var(--box-pink);
+    margin-bottom: 18px;
+}
+
+.km-liste {
+    list-style: none;
+    text-align: left;
+}
+
+.km-liste li {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2px 12px;
+    padding: 10px 0;
+    border-top: 1px solid #f6e7e7;
+}
+
+.km-ort {
+    font-weight: bold;
+    font-size: 0.95rem;
+}
+
+.km-wert {
+    grid-row: 1 / span 2;
+    grid-column: 2;
+    align-self: center;
+    color: var(--box-pink);
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.km-info {
+    font-size: 0.82rem;
+    color: #999;
+}
+
+/* ===== Zufälliger Liebesgrund ===== */
+.gruende-section {
+    background: var(--card-bg);
+    padding: 25px 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+.gruende-section h2 {
+    color: var(--accent-color);
+    margin-bottom: 18px;
+}
+
+.grund-feld {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 110px;
+    background: #fff0f0;
+    border-radius: 10px;
+    padding: 20px;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: var(--text-color);
+}
+
+.grund-feld.wechsel {
+    animation: einblenden 0.4s ease;
+}
+
+@keyframes einblenden {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.grund-knopf {
+    margin-top: 16px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    background: var(--box-pink);
+    color: #fff;
+    font-size: 1rem;
+    font-family: inherit;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(240, 123, 140, 0.3);
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.grund-knopf:hover {
+    background: var(--accent-color);
+}
+
+.grund-knopf:active {
+    transform: translateY(1px);
+}
+
+/* Auf schmalen Bildschirmen der Zeitstrahl kompakter */
+@media (max-width: 600px) {
+    .timeline-section {
+        padding: 25px 16px 20px;
+    }
+
+    .punkt {
+        width: 20px;
+        height: 20px;
+        border-width: 3px;
+    }
+
+    .punkt-datum {
+        font-size: 0.72rem;
+    }
+
+    .timeline-linie {
+        top: 9px;
+    }
 }
