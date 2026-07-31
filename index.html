@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Du und Ich</title>
-    <!-- Verknüpfung zur externen CSS-Datei -->
-    <link rel="stylesheet" href="style.css">
+    <!-- Verknüpfung zur externen CSS-Datei
+         style.css  = runder Stil mit Schatten
+         style2.css = Zeitungsstil in Times New Roman -->
+    <link rel="stylesheet" href="style2.css">
 </head>
 <body class="gesperrt">
 
@@ -142,29 +144,25 @@
                 </button>
 
                 <button class="timeline-punkt" type="button" data-titel="Straßburg"
-                        data-text="Unser erster gemeinsamer Trip: mein kleines Auto, ein winziges AirBnB und ein langes Wochenende im Elsass."
-                        data-bild="Bilder/Website/IMG_0377.jpg">
+                        data-text="Unser erster gemeinsamer Trip: mein kleines Auto, ein winziges AirBnB und ein langes Wochenende im Elsass.">
                     <span class="punkt"></span>
                     <span class="punkt-datum">Okt 2025</span>
                 </button>
 
                 <button class="timeline-punkt" type="button" data-titel="Weihnachtsmarkt"
-                        data-text="Lichterketten, Glühwein und ein Kuss zwischen den Tannen."
-                        data-bild="Bilder/Website/IMG_0544.jpg">
+                        data-text="Lichterketten, Glühwein und ein Kuss zwischen den Tannen.">
                     <span class="punkt"></span>
                     <span class="punkt-datum">Dez 2025</span>
                 </button>
 
                 <button class="timeline-punkt" type="button" data-titel="München"
-                        data-text="Rennwagen, ein türkisblauer See und eine Kirchendecke, bei der wir beide nur nach oben geschaut haben."
-                        data-bild="Bilder/Website/IMG_1193.jpg">
+                        data-text="Rennwagen, ein türkisblauer See und eine Kirchendecke, bei der wir beide nur nach oben geschaut haben.">
                     <span class="punkt"></span>
                     <span class="punkt-datum">Jun 2026</span>
                 </button>
 
                 <button class="timeline-punkt" type="button" data-titel="Madeira"
-                        data-text="Neun Tage Insel: Sonnenaufgang über den Wolken, Delfine, Nebelwald und du neben mir."
-                        data-bild="Bilder/Website/IMG_1564.jpg">
+                        data-text="Neun Tage Insel: Sonnenaufgang über den Wolken, Delfine, Nebelwald und du neben mir.">
                     <span class="punkt"></span>
                     <span class="punkt-datum">Jul 2026</span>
                 </button>
@@ -172,7 +170,6 @@
                 <div class="timeline-fenster" id="timeline-fenster" hidden>
                     <button class="fenster-zu" type="button" id="fenster-zu" aria-label="Schließen">&times;</button>
                     <h3 id="fenster-titel"></h3>
-                    <img id="fenster-bild" alt="" hidden>
                     <p id="fenster-text"></p>
                 </div>
             </div>
@@ -370,7 +367,6 @@
             const fenster = document.getElementById("timeline-fenster");
             const titel   = document.getElementById("fenster-titel");
             const text    = document.getElementById("fenster-text");
-            const bild    = document.getElementById("fenster-bild");
             const punkte  = [...strahl.querySelectorAll(".timeline-punkt")];
             let offen = null;
 
@@ -383,14 +379,6 @@
             function oeffnen(knopf) {
                 titel.textContent = knopf.dataset.titel;
                 text.textContent  = knopf.dataset.text;
-                if (knopf.dataset.bild) {
-                    bild.src = knopf.dataset.bild;
-                    bild.alt = knopf.dataset.titel;
-                    bild.hidden = false;
-                } else {
-                    bild.removeAttribute("src");
-                    bild.hidden = true;
-                }
 
                 punkte.forEach(p => p.classList.remove("aktiv"));
                 knopf.classList.add("aktiv");

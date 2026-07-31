@@ -1,0 +1,739 @@
+/* =========================================================
+   Stylesheet 2 - Zeitungsstil
+   Weiß und Rosa, Times New Roman, feine Linien statt Schatten.
+
+   Umschalten: in index.html im <link> entweder
+   style.css (runder Stil) oder style2.css (dieser Stil) eintragen.
+   ========================================================= */
+
+:root {
+    --seite:        #f6e7eb;   /* Hintergrund der Seite */
+    --papier:       #ffffff;   /* Papierweiß der Kästen */
+    --tinte:        #262220;   /* fast schwarze Druckfarbe */
+    --tinte-hell:   #7a706d;   /* Grau für Nebentexte */
+    --rosa:         #c2566a;   /* kräftiges Rosa für Akzente */
+    --rosa-blass:   #fdf2f4;   /* zartes Rosa für Flächen */
+    --linie:        #e2ccd2;   /* feine Trennlinien */
+    --linie-stark:  #262220;   /* starke Linien */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Times New Roman', Times, serif;
+    background-color: var(--seite);
+    color: var(--tinte);
+    line-height: 1.6;
+    text-align: center;
+    padding: 20px;
+    font-size: 17px;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: var(--papier);
+    border: 1px solid var(--linie);
+    padding: 0 32px 32px;
+}
+
+/* ===== Zeitungskopf ===== */
+header {
+    padding: 34px 0 0;
+    border-bottom: 3px double var(--linie-stark);
+    margin-bottom: 30px;
+}
+
+h1 {
+    font-size: clamp(2.1rem, 6vw, 3.6rem);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    line-height: 1.1;
+    color: var(--tinte);
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--linie-stark);
+}
+
+/* Zeile unter dem Titel wie eine Ausgaben-Zeile */
+.subtitle {
+    font-style: italic;
+    font-size: 0.98rem;
+    color: var(--tinte-hell);
+    padding: 10px 0 14px;
+    letter-spacing: 0.03em;
+}
+
+/* ===== Raster ===== */
+.layout {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 0;
+    align-items: stretch;
+}
+
+/* Trennlinien zwischen den Spalten wie im Zeitungssatz */
+.layout > section {
+    padding: 26px 24px 30px;
+    border-bottom: 1px solid var(--linie);
+    border-right: 1px solid var(--linie);
+}
+
+.layout > section:nth-child(even) {
+    border-right: none;
+}
+
+.counter-section,
+.timeline-section,
+.highlights-section {
+    grid-column: 1 / -1;
+    border-right: none !important;
+}
+
+@media (max-width: 850px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+    .layout > section {
+        border-right: none;
+    }
+}
+
+/* ===== Überschriften ===== */
+.layout h2,
+.gallery-title {
+    font-size: 1.35rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--tinte);
+    padding-bottom: 8px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid var(--linie-stark);
+}
+
+/* ===== Zähler ===== */
+.counter-title {
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--tinte-hell);
+    margin-bottom: 16px;
+}
+
+.timer {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+}
+
+.time-box {
+    background: var(--papier);
+    border-left: 1px solid var(--linie);
+    padding: 6px 26px;
+    min-width: 96px;
+}
+
+.time-box:first-child {
+    border-left: none;
+}
+
+.time-box span {
+    display: block;
+    font-size: 2.3rem;
+    font-weight: bold;
+    line-height: 1.1;
+    color: var(--rosa);
+}
+
+.time-box label {
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--tinte-hell);
+    margin-top: 2px;
+}
+
+/* ===== Liebesbrief: Leitartikel ===== */
+.love-letter {
+    text-align: left;
+}
+
+.love-letter h2 {
+    text-align: center;
+}
+
+.love-letter p {
+    margin-bottom: 14px;
+    text-align: justify;
+    hyphens: auto;
+}
+
+/* Initial wie im Zeitungsartikel */
+.love-letter p:first-of-type::first-letter {
+    float: left;
+    font-size: 3.6em;
+    line-height: 0.82;
+    padding: 4px 8px 0 0;
+    color: var(--rosa);
+    font-weight: bold;
+}
+
+/* ===== Polaroid-Galerie ===== */
+.gallery-title {
+    text-align: center;
+}
+
+.gallery-subtitle {
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--tinte-hell);
+    margin-bottom: 20px;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 14px;
+}
+
+.polaroid-wrapper {
+    background: transparent;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.polaroid-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.7s;
+    transform-style: preserve-3d;
+}
+
+.polaroid-wrapper.is-flipped .polaroid-inner {
+    transform: rotateY(180deg);
+}
+
+.polaroid-front,
+.polaroid-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    background: var(--papier);
+    border: 1px solid var(--linie-stark);
+    padding: 10px 10px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.polaroid-front {
+    align-items: center;
+    justify-content: center;
+    background: var(--rosa-blass);
+}
+
+.polaroid-front p {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--rosa);
+}
+
+.polaroid-back {
+    transform: rotateY(180deg);
+}
+
+.photo-placeholder {
+    width: 100%;
+    flex-grow: 1;
+    background-color: var(--rosa-blass);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--tinte-hell);
+    overflow: hidden;
+}
+
+.photo-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.caption {
+    margin-top: 8px;
+    font-size: 0.78rem;
+    font-style: italic;
+    color: var(--tinte-hell);
+}
+
+/* ===== Zeitstrahl ===== */
+.timeline-hinweis {
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--tinte-hell);
+    margin-bottom: 30px;
+}
+
+.timeline {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0 4px;
+}
+
+.timeline-linie {
+    position: absolute;
+    top: 8px;
+    left: 6%;
+    right: 6%;
+    height: 1px;
+    background: var(--linie-stark);
+}
+
+.timeline-punkt {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.punkt {
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    background: var(--papier);
+    border: 2px solid var(--linie-stark);
+    transition: background 0.2s ease;
+}
+
+.timeline-punkt:hover .punkt {
+    background: var(--rosa-blass);
+}
+
+.timeline-punkt.aktiv .punkt {
+    background: var(--rosa);
+    border-color: var(--rosa);
+}
+
+.punkt-datum {
+    font-size: 0.8rem;
+    font-variant: small-caps;
+    letter-spacing: 0.08em;
+    color: var(--tinte-hell);
+    text-align: center;
+}
+
+.timeline-punkt.aktiv .punkt-datum {
+    color: var(--rosa);
+    font-weight: bold;
+}
+
+/* Das kleine Fenster über dem Punkt: wie ein Zeitungskasten */
+.timeline-fenster {
+    position: absolute;
+    bottom: calc(100% + 16px);
+    z-index: 30;
+    width: 270px;
+    max-width: 100%;
+    background: var(--papier);
+    border: 1px solid var(--linie-stark);
+    box-shadow: 5px 5px 0 rgba(38, 34, 32, 0.08);
+    padding: 16px 18px 18px;
+    text-align: left;
+}
+
+.timeline-fenster[hidden] {
+    display: none;
+}
+
+.timeline-fenster h3 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0 20px 6px 0;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--linie);
+}
+
+.timeline-fenster p {
+    font-size: 0.92rem;
+    line-height: 1.5;
+    text-align: justify;
+    hyphens: auto;
+}
+
+.fenster-zu {
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: 1.3rem;
+    line-height: 1;
+    color: var(--tinte-hell);
+    cursor: pointer;
+    padding: 0 4px;
+}
+
+.fenster-zu:hover {
+    color: var(--rosa);
+}
+
+/* ===== Kilometerzähler ===== */
+.km-gesamt {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--rosa);
+    line-height: 1.1;
+    margin-bottom: 6px;
+}
+
+.km-liste {
+    list-style: none;
+    text-align: left;
+    margin-top: 14px;
+}
+
+.km-liste li {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0 12px;
+    padding: 9px 0;
+    border-top: 1px solid var(--linie);
+}
+
+.km-ort {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.km-info {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--tinte-hell);
+}
+
+.km-wert {
+    grid-row: 1 / span 2;
+    grid-column: 2;
+    align-self: center;
+    color: var(--rosa);
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* ===== Zufälliger Liebesgrund ===== */
+.gruende-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.grund-feld {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 120px;
+    background: var(--rosa-blass);
+    border: 1px solid var(--linie);
+    padding: 22px;
+    font-size: 1.1rem;
+    font-style: italic;
+    line-height: 1.5;
+}
+
+.grund-feld.wechsel {
+    animation: einblenden 0.4s ease;
+}
+
+@keyframes einblenden {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.grund-knopf {
+    margin-top: 16px;
+    padding: 11px 20px;
+    background: var(--papier);
+    color: var(--tinte);
+    border: 1px solid var(--linie-stark);
+    font-family: inherit;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.grund-knopf:hover {
+    background: var(--rosa);
+    border-color: var(--rosa);
+    color: var(--papier);
+}
+
+/* ===== Ausklappbare Urlaube ===== */
+.highlights-section {
+    text-align: left;
+}
+
+.highlights-section h2 {
+    text-align: center;
+}
+
+details {
+    border-bottom: 1px solid var(--linie);
+}
+
+details:first-of-type {
+    border-top: 1px solid var(--linie);
+}
+
+summary {
+    padding: 14px 4px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+summary::after {
+    content: '+';
+    font-size: 1.3rem;
+    color: var(--rosa);
+}
+
+details[open] summary::after {
+    content: '\2013';
+}
+
+details[open] summary {
+    color: var(--rosa);
+}
+
+.details-content {
+    padding: 4px 4px 22px;
+    font-size: 0.98rem;
+    text-align: justify;
+    hyphens: auto;
+}
+
+.trip-chapter {
+    margin-top: 24px;
+    margin-bottom: 4px;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--rosa);
+    border-bottom: 1px solid var(--linie);
+    padding-bottom: 5px;
+}
+
+.trip-photos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+    margin-top: 14px;
+}
+
+.trip-photo {
+    aspect-ratio: 1 / 1;
+    background: var(--rosa-blass);
+    border: 1px solid var(--linie);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--tinte-hell);
+    font-size: 0.85rem;
+}
+
+.trip-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* ===== Fußzeile ===== */
+footer {
+    margin-top: 0;
+    padding: 22px 20px 6px;
+    border-top: 3px double var(--linie-stark);
+    font-size: 0.85rem;
+    font-style: italic;
+    letter-spacing: 0.04em;
+    color: var(--tinte-hell);
+}
+
+/* ===== Passwortsperre ===== */
+body.gesperrt {
+    overflow: hidden;
+}
+
+body.gesperrt .container {
+    display: none;
+}
+
+.login-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: var(--seite);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+body:not(.gesperrt) .login-overlay {
+    display: none;
+}
+
+.login-box {
+    background: var(--papier);
+    border: 1px solid var(--linie-stark);
+    padding: 40px 34px;
+    width: 100%;
+    max-width: 380px;
+}
+
+.login-box h1 {
+    font-size: 1.8rem;
+    border-bottom: 1px solid var(--linie-stark);
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+}
+
+.login-text {
+    font-style: italic;
+    color: var(--tinte-hell);
+    font-size: 0.95rem;
+    margin-bottom: 24px;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid var(--linie-stark);
+    background: var(--papier);
+    font-family: inherit;
+    font-size: 1rem;
+    text-align: center;
+    outline: none;
+}
+
+.login-box input:focus {
+    border-color: var(--rosa);
+}
+
+.login-box button {
+    width: 100%;
+    margin-top: 14px;
+    padding: 11px;
+    background: var(--papier);
+    color: var(--tinte);
+    border: 1px solid var(--linie-stark);
+    font-family: inherit;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.login-box button:hover {
+    background: var(--rosa);
+    border-color: var(--rosa);
+    color: var(--papier);
+}
+
+.login-fehler {
+    margin-top: 14px;
+    color: var(--rosa);
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+/* ===== Schmale Bildschirme ===== */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 0 16px 22px;
+    }
+
+    .layout > section {
+        padding: 22px 4px 24px;
+    }
+
+    /* Zähler als 2x2-Raster, damit keine Linie frei stehen bleibt */
+    .timer {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .time-box {
+        padding: 8px 10px;
+        min-width: 0;
+        border-left: 1px solid var(--linie);
+        border-top: 1px solid var(--linie);
+    }
+
+    .time-box:nth-child(odd) {
+        border-left: none;
+    }
+
+    .time-box:nth-child(-n+2) {
+        border-top: none;
+    }
+
+    .time-box span {
+        font-size: 1.7rem;
+    }
+
+    .punkt {
+        width: 14px;
+        height: 14px;
+    }
+
+    .punkt-datum {
+        font-size: 0.7rem;
+    }
+
+    .timeline-linie {
+        top: 7px;
+    }
+}
