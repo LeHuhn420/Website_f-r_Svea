@@ -50,11 +50,37 @@ h1 {
     align-items: start;
 }
 
-/* Zähler, Zeitstrahl und Urlaube nehmen die volle Breite ein */
+/* Aufmacher, Zähler, Zeitstrahl und Urlaube nehmen die volle Breite ein */
+.news-section,
 .counter-section,
 .timeline-section,
 .highlights-section {
     grid-column: 1 / -1;
+}
+
+/* Aufmacher */
+.news-section {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+.news-titel {
+    font-size: clamp(2.8rem, 11vw, 5rem);
+    line-height: 1;
+    letter-spacing: 0.1em;
+    text-indent: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-color);
+    margin-bottom: 12px;
+}
+
+.news-text {
+    font-size: 1.15rem;
+    color: var(--text-color);
+    max-width: 30em;
+    margin: 0 auto;
 }
 
 @media (max-width: 850px) {

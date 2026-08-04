@@ -1,9 +1,6 @@
 /* =========================================================
    Stylesheet 2 - Zeitungsstil
    Weiß und Rosa, Times New Roman, feine Linien statt Schatten.
-
-   Umschalten: in index.html im <link> entweder
-   style.css (runder Stil) oder style2.css (dieser Stil) eintragen.
    ========================================================= */
 
 :root {
@@ -87,6 +84,7 @@ h1 {
     border-right: none;
 }
 
+.news-section,
 .counter-section,
 .timeline-section,
 .highlights-section {
@@ -114,6 +112,36 @@ h1 {
     padding-bottom: 8px;
     margin-bottom: 18px;
     border-bottom: 1px solid var(--linie-stark);
+}
+
+/* ===== Aufmacher ===== */
+.news-section {
+    padding-top: 18px !important;
+    padding-bottom: 24px !important;
+}
+
+/* Überschreibt die allgemeine Regel .layout h2, die sonst gewinnt */
+.layout .news-titel {
+    font-size: clamp(3.4rem, 13vw, 7rem);
+    line-height: 0.9;
+    letter-spacing: 0.14em;
+    text-indent: 0.14em;      /* gleicht die Sperrung rechts aus */
+    text-transform: uppercase;
+    color: var(--tinte);
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 14px;
+}
+
+.news-text {
+    font-size: clamp(1.05rem, 2.6vw, 1.5rem);
+    font-style: italic;
+    line-height: 1.4;
+    color: var(--rosa);
+    max-width: 30em;
+    margin: 0 auto;
+    padding-top: 12px;
+    border-top: 1px solid var(--linie-stark);
 }
 
 /* ===== Zähler ===== */
