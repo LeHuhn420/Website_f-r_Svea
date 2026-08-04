@@ -15,9 +15,9 @@
     <div class="login-overlay" id="login">
         <form class="login-box" id="login-form">
             <h1>Nur für dich</h1>
-            <p class="login-text">Diese Seite ist privat.<br>Bitte gib das Passwort ein.</p>
-            <input type="password" id="login-eingabe" placeholder="Passwort"
-                   autocomplete="current-password" aria-label="Passwort">
+            <p class="login-text">Diese Seite ist privat.<br>Bitte gib den Zahlencode ein.</p>
+            <input type="password" id="login-eingabe" placeholder="Zahlencode"
+                   inputmode="numeric" autocomplete="current-password" aria-label="Zahlencode">
             <button type="submit">Öffnen</button>
             <p class="login-fehler" id="login-fehler" hidden>Das war leider nicht richtig.</p>
         </form>
@@ -309,12 +309,12 @@
 
     <!-- PASSWORTSPERRE -->
     <script>
-        // Aktuelles Passwort: unserjahr
+        // Aktueller Zahlencode: 300826
         //
         // Passwort aendern: Seite oeffnen, mit F12 die Browser-Konsole
         // aufmachen und dort eingeben:   pruefwert("deinNeuesPasswort")
         // Den ausgegebenen Wert hier unten einsetzen.
-        const PASSWORT_PRUEFWERT = "7f7f3adf";
+        const PASSWORT_PRUEFWERT = "b0759716";
 
         function pruefwert(text) {
             let h = 2166136261;
