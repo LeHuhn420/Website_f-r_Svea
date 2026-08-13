@@ -129,6 +129,53 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Polaroid 4 - noch leer
+                     Foto einsetzen: den Text unten ersetzen durch
+                     <img src="Bilder/Website/DATEINAME.jpg" alt="Beschreibung" loading="lazy"> -->
+                <div class="polaroid-wrapper" onclick="this.classList.toggle('is-flipped')">
+                    <div class="polaroid-inner">
+                        <div class="polaroid-front">
+                            <div>
+                                <p>Antippen zum Öffnen</p>
+                            </div>
+                        </div>
+                        <div class="polaroid-back">
+                            <div class="photo-placeholder">Foto 4 einfügen</div>
+                            <div class="caption"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Polaroid 5 - noch leer -->
+                <div class="polaroid-wrapper" onclick="this.classList.toggle('is-flipped')">
+                    <div class="polaroid-inner">
+                        <div class="polaroid-front">
+                            <div>
+                                <p>Antippen zum Öffnen</p>
+                            </div>
+                        </div>
+                        <div class="polaroid-back">
+                            <div class="photo-placeholder">Foto 5 einfügen</div>
+                            <div class="caption"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Polaroid 6 - noch leer -->
+                <div class="polaroid-wrapper" onclick="this.classList.toggle('is-flipped')">
+                    <div class="polaroid-inner">
+                        <div class="polaroid-front">
+                            <div>
+                                <p>Antippen zum Öffnen</p>
+                            </div>
+                        </div>
+                        <div class="polaroid-back">
+                            <div class="photo-placeholder">Foto 6 einfügen</div>
+                            <div class="caption"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -273,6 +320,13 @@
                     </div>
                 </div>
             </details>
+
+            <details name="urlaube">
+                <summary>Sizilien</summary>
+                <div class="details-content">
+                    Hier kannst du eure Erinnerung an Sizilien reinschreiben.
+                </div>
+            </details>
         </section>
 
         </main>
@@ -309,12 +363,12 @@
 
     <!-- PASSWORTSPERRE -->
     <script>
-        // Aktueller Zahlencode: 300826
+        // Aktueller Zahlencode: 300825
         //
         // Passwort aendern: Seite oeffnen, mit F12 die Browser-Konsole
         // aufmachen und dort eingeben:   pruefwert("deinNeuesPasswort")
         // Den ausgegebenen Wert hier unten einsetzen.
-        const PASSWORT_PRUEFWERT = "b0759716";
+        const PASSWORT_PRUEFWERT = "af759583";
 
         function pruefwert(text) {
             let h = 2166136261;
@@ -406,11 +460,13 @@
         })();
 
         /* ---------- 2) Kilometerzaehler ---------- */
-        // Werte hier anpassen. Startpunkt ist Backnang.
+        // Werte hier anpassen. Alle Angaben sind Hin- und Rueckweg,
+        // gerundete Schaetzwerte.
         const FAHRTEN = [
-            { ort: "Straßburg",  info: "mit dem Auto, hin und zurück",      km:  380 },
-            { ort: "München",    info: "mit dem Auto, hin und zurück",      km:  410 },
-            { ort: "Madeira",    info: "Flug ab Stuttgart, hin und zurück", km: 5600 }
+            { ort: "Straßburg", info: "ab Kirchberg an der Murr, mit dem Auto",  km:  400 },
+            { ort: "München",   info: "ab Kirchberg an der Murr, mit dem Auto",  km:  440 },
+            { ort: "Madeira",   info: "Flug ab Frankfurt",                       km: 5700 },
+            { ort: "Sizilien",  info: "Flug ab Stuttgart",                       km: 2600 }
         ];
 
         (function () {
