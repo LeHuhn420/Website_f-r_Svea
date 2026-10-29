@@ -4,12 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Du und Ich</title>
-    <!-- style.css  = runder Stil mit Schatten
-         style2.css = Zeitungsstil in Times New Roman -->
-    <link rel="stylesheet" href="style2.css">
+    <!-- style.css        = runder Stil mit Schatten
+         style2.css       = Zeitungsstil in Times New Roman
+         style_herbst.css = Herbst: dunkelrot mit fallenden Blättern
+         Zum Wechseln die gewünschte Zeile freilegen, die andere einklammern. -->
+    <link rel="stylesheet" href="style_herbst.css">
+    <!-- <link rel="stylesheet" href="style2.css"> -->
     <!-- <link rel="stylesheet" href="style.css"> -->
 </head>
 <body class="gesperrt">
+
+    <!-- FALLENDE HERBSTBLÄTTER
+         Rein dekorativ. Nur style_herbst.css gestaltet sie,
+         in den anderen Stylesheets bleiben sie unsichtbar. -->
+    <div class="blaetter" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span>
+    </div>
 
     <!-- PASSWORTSPERRE-->
     <div class="login-overlay" id="login">
